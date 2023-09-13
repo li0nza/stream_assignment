@@ -225,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
 
-        /// [DatedWeatherByCoordinates] usage
+        /// [CurrentWeatherByCoordinates] and [DatedWeatherByCoordinates] usage
         const Text('Weather widget for current weather'),
         CurrentWeatherByCoordinates(
           _dataFactory,
@@ -285,7 +285,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
 
-        /// [DatedWeatherByName] usage
+        /// [CurrentWeatherByName] and [DatedWeatherByName] usage
         const Text('Weather widget for current weather'),
         CurrentWeatherByName(
           _dataFactory,

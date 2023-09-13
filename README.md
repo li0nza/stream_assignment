@@ -33,6 +33,17 @@ Instantiate the dataFactory with API key from https://openweathermap.org/api
 ```
 Widgets can be used like:
 ```dart
+CurrentWeatherByCoordinates(
+  _dataFactory,
+  _latitude,
+  _longitude,
+  _metric ? 'metric' : 'imperial',
+),
+CurrentWeatherByName(
+  _dataFactory,
+  _name,
+  _metric ? 'metric' : 'imperial',
+),
 DatedWeatherByCoordinates(
   _dataFactory,
   _latitude,
@@ -49,10 +60,10 @@ DatedWeatherByName(
 ```
 If only data is desired, functions can be accesed by:
 ```dart
-    _dataFactory.getLocationByCoordinates(lat, lon); // -> returns Location data for the given Coordinates
-    _dataFactory.getLocationByName(name); // -> returns Location data for the given Name
-    _dataFactory.getCurrentWeatherByCoordinates(latitude, lonitude); // -> returns current Weather data for the given Coordinates
-    _dataFactory.getDatedWeatherByCoordinates(latitude, lonitude, timeStamp); // -> returns Weather data for the given Coordinates
+_dataFactory.getLocationByCoordinates(lat, lon); // -> returns Location data for the given Coordinates
+_dataFactory.getLocationByName(name); // -> returns Location data for the given Name
+_dataFactory.getCurrentWeatherByCoordinates(latitude, lonitude); // -> returns current Weather data fthe given Coordinates
+_dataFactory.getDatedWeatherByCoordinates(latitude, lonitude, timeStamp); // -> returns Weather data for the given Coordinates
 ```
 
 To fetch weather data for a named location, `getLocationByName` needs to be called first to find the coordinates and then `getDatedWeatherByCoordinates` and/or `getCurrentWeatherByCoordinates` can be used.
