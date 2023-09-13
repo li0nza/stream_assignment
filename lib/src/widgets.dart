@@ -57,14 +57,8 @@ class _WeatherDataWidgetState extends State<WeatherDataWidget> {
       return _errorWidget();
     }
 
-    return _WeatherCard(
-      context,
-      _weather,
-      _location,
-      widget.unitOfMeasure,
-      updateData: _updateData,
-      isCurrent: widget.isCurrent
-    );
+    return _WeatherCard(context, _weather, _location, widget.unitOfMeasure,
+        updateData: _updateData, isCurrent: widget.isCurrent);
   }
 
   Future<void> _updateData() async {
@@ -104,6 +98,8 @@ class CurrentWeatherByCoordinates extends WeatherDataWidget {
   }) : super(
           dataFactory: dataFactory,
           unitOfMeasure: unitOfMeasure,
+
+          /// function passed to call `_updateData` in parent widget
           fetchWeatherData: () => dataFactory.getCurrentWeatherByCoordinates(lat, lon, unitOfMeasure: unitOfMeasure),
           isCurrent: true,
         );
@@ -132,6 +128,8 @@ class CurrentWeatherByName extends WeatherDataWidget {
   }) : super(
           dataFactory: dataFactory,
           unitOfMeasure: unitOfMeasure,
+
+          /// function passed to call `_updateData` in parent widget
           fetchWeatherData: () => _fetchCurrentWeatherByName(dataFactory, name, unitOfMeasure),
           isCurrent: true,
         );
@@ -146,7 +144,10 @@ class CurrentWeatherByName extends WeatherDataWidget {
   }
 
   static Future<Weather> _fetchCurrentWeatherByName(
-      WeatherDataFactory dataFactory, String name, String unitOfMeasure) async {
+    WeatherDataFactory dataFactory,
+    String name,
+    String unitOfMeasure,
+  ) async {
     final location = await dataFactory.getLocationByName(name);
     return await dataFactory.getCurrentWeatherByCoordinates(location.lat, location.lon, unitOfMeasure: unitOfMeasure);
   }
@@ -170,6 +171,8 @@ class DatedWeatherByCoordinates extends WeatherDataWidget {
   }) : super(
           dataFactory: dataFactory,
           unitOfMeasure: unitOfMeasure,
+
+          /// function passed to call `_updateData` in parent widget
           fetchWeatherData: () => dataFactory.getDatedWeatherByCoordinates(lat, lon, (timeStamp / 1000).floor(),
               unitOfMeasure: unitOfMeasure),
         );
@@ -178,7 +181,10 @@ class DatedWeatherByCoordinates extends WeatherDataWidget {
   bool propertiesChanged(WeatherDataWidget oldWidget) {
     /// check `lat`, `lon`, `timeStamp` and `unitOfMeasure` to see if state updated and new data needs to be fetched.
     if (oldWidget is DatedWeatherByCoordinates) {
-      return lat != oldWidget.lat || lon != oldWidget.lon || timeStamp != oldWidget.timeStamp || unitOfMeasure != oldWidget.unitOfMeasure;
+      return lat != oldWidget.lat ||
+          lon != oldWidget.lon ||
+          timeStamp != oldWidget.timeStamp ||
+          unitOfMeasure != oldWidget.unitOfMeasure;
     }
     return false;
   }
@@ -191,7 +197,8 @@ class DatedWeatherByName extends WeatherDataWidget {
   final String name;
   final int timeStamp;
 
-  DatedWeatherByName({super.key,
+  DatedWeatherByName({
+    super.key,
     required WeatherDataFactory dataFactory,
     required this.name,
     required this.timeStamp,
@@ -199,10 +206,13 @@ class DatedWeatherByName extends WeatherDataWidget {
   }) : super(
           dataFactory: dataFactory,
           unitOfMeasure: unitOfMeasure,
+
+          /// function passed to call `_updateData` in parent widget
           fetchWeatherData: () => _fetchDatedWeatherByName(dataFactory, name, timeStamp, unitOfMeasure),
         );
 
   @override
+
   /// Chec
   bool propertiesChanged(WeatherDataWidget oldWidget) {
     /// check `name`, `timeStamp` and `unitOfMeasure` to see if state updated and new data needs to be fetched.
@@ -213,7 +223,11 @@ class DatedWeatherByName extends WeatherDataWidget {
   }
 
   static Future<Weather> _fetchDatedWeatherByName(
-      WeatherDataFactory dataFactory, String name, int timeStamp, String unitOfMeasure) async {
+    WeatherDataFactory dataFactory,
+    String name,
+    int timeStamp,
+    String unitOfMeasure,
+  ) async {
     final location = await dataFactory.getLocationByName(name);
     return await dataFactory.getDatedWeatherByCoordinates(location.lat, location.lon, (timeStamp / 1000).floor(),
         unitOfMeasure: unitOfMeasure);
@@ -270,7 +284,8 @@ class _WeatherCard extends StatelessWidget {
   final Future<void> Function()? updateData;
   final bool isCurrent;
 
-  const _WeatherCard(this.context, this.weather, this.location, this.unitOfMeasure, {this.updateData, this.isCurrent = false});
+  const _WeatherCard(this.context, this.weather, this.location, this.unitOfMeasure,
+      {this.updateData, this.isCurrent = false});
 
   @override
   Widget build(BuildContext context) {
