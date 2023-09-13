@@ -34,28 +34,28 @@ Instantiate the dataFactory with API key from https://openweathermap.org/api
 Widgets can be used like:
 ```dart
 CurrentWeatherByCoordinates(
-  _dataFactory,
-  _latitude,
-  _longitude,
-  _metric ? 'metric' : 'imperial',
+  dataFactory: _dataFactory,
+  lat: _latitude,
+  lon: _longitude,
+  unitOfMeasure: _metric ? 'metric' : 'imperial',
 ),
 CurrentWeatherByName(
-  _dataFactory,
-  _name,
-  _metric ? 'metric' : 'imperial',
+  dataFactory: _dataFactory,
+  name: _name,
+  unitOfMeasure: _metric ? 'metric' : 'imperial',
 ),
 DatedWeatherByCoordinates(
-  _dataFactory,
-  _latitude,
-  _longitude,
-  _selectedDateTime.millisecondsSinceEpoch,
-  _metric ? 'metric' : 'imperial',
+  dataFactory: _dataFactory,
+  lat: _latitude,
+  lon: _longitude,
+  timeStamp: _selectedDateTime.millisecondsSinceEpoch,
+  unitOfMeasure: _metric ? 'metric' : 'imperial',
 ),
 DatedWeatherByName(
-  _dataFactory,
-  _name,
-  _selectedDateTime.millisecondsSinceEpoch,
-  _metric ? 'metric' : 'imperial',
+  dataFactory: _dataFactory,
+  name: _name,
+  timeStamp: _selectedDateTime.millisecondsSinceEpoch,
+  unitOfMeasure: _metric ? 'metric' : 'imperial',
 ),
 ```
 If only data is desired, functions can be accesed by:

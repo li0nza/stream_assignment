@@ -228,18 +228,18 @@ class _MyHomePageState extends State<MyHomePage> {
         /// [CurrentWeatherByCoordinates] and [DatedWeatherByCoordinates] usage
         const Text('Weather widget for current weather'),
         CurrentWeatherByCoordinates(
-          _dataFactory,
-          _latitude,
-          _longitude,
-          _metric ? 'metric' : 'imperial',
+          dataFactory: _dataFactory,
+          lat: _latitude,
+          lon: _longitude,
+          unitOfMeasure: _metric ? 'metric' : 'imperial',
         ),
         const Text('Weather widget for a specific date'),
         DatedWeatherByCoordinates(
-          _dataFactory,
-          _latitude,
-          _longitude,
-          _selectedDateTime.millisecondsSinceEpoch,
-          _metric ? 'metric' : 'imperial',
+          dataFactory: _dataFactory,
+          lat: _latitude,
+          lon: _longitude,
+          timeStamp: _selectedDateTime.millisecondsSinceEpoch,
+          unitOfMeasure: _metric ? 'metric' : 'imperial',
         ),
       ],
     );
@@ -288,16 +288,16 @@ class _MyHomePageState extends State<MyHomePage> {
         /// [CurrentWeatherByName] and [DatedWeatherByName] usage
         const Text('Weather widget for current weather'),
         CurrentWeatherByName(
-          _dataFactory,
-          _name,
-          _metric ? 'metric' : 'imperial',
+          dataFactory: _dataFactory,
+          name: _name,
+          unitOfMeasure: _metric ? 'metric' : 'imperial',
         ),
         const Text('Weather widget for a specific date'),
         DatedWeatherByName(
-          _dataFactory,
-          _name,
-          _selectedDateTime.millisecondsSinceEpoch,
-          _metric ? 'metric' : 'imperial',
+          dataFactory: _dataFactory,
+          name: _name,
+          timeStamp: _selectedDateTime.millisecondsSinceEpoch,
+          unitOfMeasure: _metric ? 'metric' : 'imperial',
         ),
       ],
     );
